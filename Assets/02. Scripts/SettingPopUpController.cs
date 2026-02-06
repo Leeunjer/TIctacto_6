@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public class SettingPopUpController : MonoBehaviour
+public class SettingPopUpController : PanelController
 {
+    public void OnClickCloseButton()
+    {
+        Hide();
+    }
     
 }

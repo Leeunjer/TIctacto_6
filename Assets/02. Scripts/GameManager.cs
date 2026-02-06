@@ -1,20 +1,39 @@
+using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEngine;
+using static TicTacTockGame.Constans;
+
 
 public class GameManager : Singltone<GameManager>
 {
+    [SerializeField]
+    private GameObject SettingPrefab; 
+    [SerializeField] private Canvas canvas;   
+    private GameType _gameType;
+
     protected override void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        // TODo 씬이 전환 될 때 GameManager가 해야 할 일 구현
+        canvas = FindFirstObjectByType<Canvas>();
+        //씬이 로드 될 때 실행 되는 코드
     }
 
-    void Start()
+    public void OpenSettingsPanel()
     {
-       
+       var settingsPanelObject =  Instantiate(SettingPrefab , canvas.transform);
+       settingsPanelObject.GetComponent<SettingPopUpController>().Show();
     }
-
     
-    void Update()
+    // 씬 전환 
+    public void ChangeScene(GameType gameType)
     {
-        
+        _gameType = gameType;
+        SceneManager.LoadScene("DualGame");
     }
+    public void ChangeMain(GameType gameType)
+    {
+        _gameType = gameType;
+        SceneManager.LoadScene(0);
+    }
+    
+
 }
