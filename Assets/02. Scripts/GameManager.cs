@@ -33,7 +33,7 @@ public class GameManager : Singltone<GameManager>
          // GamePanelController 참조 가져오기
         _gamePanelController = FindFirstObjectByType<GamePanelController>();
 
-        _gameLogic = new GameLogic(GameType.Dual,blockController);
+        _gameLogic = new GameLogic(_gameType,blockController);
         }
     }
     //셋팅 페널

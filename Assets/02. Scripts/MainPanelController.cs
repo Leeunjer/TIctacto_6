@@ -12,7 +12,7 @@ public class MainPanelController : MonoBehaviour
 
     public void OnClickSinglePlayButton()
     {
-        //todo 싱글 플레이 버튼을 눌렀을 때
+        GameManager.Instance.ChangeScene(GameType.Single);
     }
 
     public void OnClickDuelPlayButton()
