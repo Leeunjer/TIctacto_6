@@ -735,6 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SettingPrefab: {fileID: 6818425414414105374, guid: fa87ba0722b4f5b4b88ee5baa3bff153, type: 3}
   canvas: {fileID: 383844056}
+  confirmPanelPrefab: {fileID: 6818425414414105374, guid: 2897b27fd0f169f44b65342781f4e159, type: 3}
 --- !u!4 &1105477187
 Transform:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class PanelController : MonoBehaviour
     private RectTransform panelTransform;
     private CanvasGroup _canvasGroup;
 
+    public delegate void PanelControllerHideDelegate();
+    
     void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -27,13 +29,14 @@ public class PanelController : MonoBehaviour
         _canvasGroup.DOFade(1, 0.2f).SetEase(Ease.Linear);
         panelTransform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
     }
-    public void Hide()
+    public void Hide(PanelControllerHideDelegate onComplete = null)
     {
         Debug.Log("HIde Panel");
 
         _canvasGroup.DOFade(0, 1f).SetEase(Ease.Linear);
         panelTransform.DOScale(0, 1f).SetEase(Ease.InBack).OnComplete(() =>
         {
+            onComplete?.Invoke();
             Destroy(gameObject);
         }
         

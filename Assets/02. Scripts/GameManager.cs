@@ -10,6 +10,9 @@ public class GameManager : Singltone<GameManager>
     [SerializeField]
     private GameObject SettingPrefab; 
     [SerializeField] private Canvas canvas;   
+    [SerializeField] private GameObject confirmPanelPrefab;
+
+    private GamePanelController _gamePanelController;
     private GameType _gameType;
 
     private GameLogic _gameLogic;
@@ -17,21 +20,33 @@ public class GameManager : Singltone<GameManager>
     protected override void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
         canvas = FindFirstObjectByType<Canvas>();
-
-        var blockController = FindFirstObjectByType<BlockController>();
+        if (scene.name == SCENE_GAME)
+        {
+            var blockController = FindFirstObjectByType<BlockController>();
         
 
         if(blockController != null)
         {
             blockController.InitBlocks();
         }
-        _gameLogic = new GameLogic(GameType.Dual,blockController);
-    }
 
+         // GamePanelController 참조 가져오기
+        _gamePanelController = FindFirstObjectByType<GamePanelController>();
+
+        _gameLogic = new GameLogic(GameType.Dual,blockController);
+        }
+    }
+    //셋팅 페널
     public void OpenSettingsPanel()
     {
        var settingsPanelObject =  Instantiate(SettingPrefab , canvas.transform);
        settingsPanelObject.GetComponent<SettingPopUpController>().Show();
+    }
+    //컨펌 페널
+    public void OpenConfirmPanel(string message , ConfirmPanelController.OnConfirmButtonClicked onConfirmButtonClicked)
+    {
+        var confirmPanaelOBJ = Instantiate(confirmPanelPrefab , canvas.transform);
+        confirmPanaelOBJ.GetComponent<ConfirmPanelController>().Show(message, onConfirmButtonClicked);
     }
     
     // 씬 전환 
@@ -45,6 +60,10 @@ public class GameManager : Singltone<GameManager>
         _gameType = gameType;
         SceneManager.LoadScene(SCENE_MAIN);
     }
-    
+    // Game O/X UI 업데이트
+    public void SetGameTurn(Constans.PlayerType playerTurnType)
+    {
+        _gamePanelController.SetPlayerTurnPanel(playerTurnType);
+    }
 
 }

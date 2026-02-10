@@ -7,7 +7,7 @@ namespace TicTacTockGame
     {
 
     public const string SCENE_MAIN = "Main";
-    public const string SCENE_GAME = "Game";
+    public const string SCENE_GAME = "Dual";
 
 
         public enum GameType{Main,Single,Dual}

@@ -1,4 +1,7 @@
 
+using System;
+using UnityEngine;
+
 namespace TicTacTockGame
 {
     
@@ -15,7 +18,18 @@ namespace TicTacTockGame
             // 특정 위치의 마커를 표시하는 로직
            if( gameLogic.PlaceMarker(index, playerType))
             {
-            HandleNextTurn(gameLogic); // 턴 전환
+
+                var gaemResult = gameLogic.CheckGameResult();
+                Debug.Log(gaemResult);
+                if(gaemResult == GameLogic.GameResult.None)
+                {
+                    HandleNextTurn(gameLogic); // 턴 전환
+                    Debug.Log("턴 전환");
+                }else
+                {
+                    gameLogic.EndGame(gaemResult);
+                    Debug.Log("겜 종료");
+                }
                 
             }
 

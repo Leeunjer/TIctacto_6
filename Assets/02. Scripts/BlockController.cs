@@ -16,7 +16,7 @@ public class BlockController : MonoBehaviour
             Blocks[i].InitMarker(i, blockIndex =>
             {
                 onBlcokClicked?.Invoke(blockIndex);
-                Debug.Log("BlockClicked in BlockController" + blockIndex);
+                
             });
         }
     }

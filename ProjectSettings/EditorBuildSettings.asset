@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/01. Scenes/Intro.unity
+    path: Assets/01. Scenes/Main.unity
     guid: 23dca01628cc3354bbb4a59b5081bb94
   - enabled: 1
     path: Assets/01. Scenes/SIngle.unity
     guid: 65c61a230b3bd0240a6b05212233eb91
   - enabled: 1
-    path: Assets/01. Scenes/DualGame.unity
+    path: Assets/01. Scenes/Dual.unity
     guid: 5b09d44ab9d0e0240a72294add3b57b6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}

@@ -827,6 +827,7 @@ GameObject:
   - component: {fileID: 396315718}
   - component: {fileID: 396315720}
   - component: {fileID: 396315719}
+  - component: {fileID: 396315721}
   m_Layer: 5
   m_Name: '[Panel]PlayerTurnInfo'
   m_TagString: Untagged
@@ -892,6 +893,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396315717}
   m_CullTransparentMesh: 1
+--- !u!114 &396315721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396315717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d07586d8ac6c2e4a99624faf415c3ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerATurnPanel: {fileID: 396547595}
+  PlayerBTruenPanel: {fileID: 721235990}
 --- !u!1 &396547593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d07586d8ac6c2e4a99624faf415c3ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerATurnPanel: {fileID: 0}
+  PlayerBTruenPanel: {fileID: 0}
 --- !u!1 &628864233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,6 +1487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SettingPrefab: {fileID: 6818425414414105374, guid: fa87ba0722b4f5b4b88ee5baa3bff153, type: 3}
   canvas: {fileID: 589262492}
+  confirmPanelPrefab: {fileID: 6818425414414105374, guid: 2897b27fd0f169f44b65342781f4e159, type: 3}
 --- !u!4 &702647456
 Transform:
   m_ObjectHideFlags: 0
