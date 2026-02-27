@@ -1,9 +1,11 @@
+using System;
+using System.Diagnostics;
 using UnityEngine;
 using static TicTacTockGame.Constans;
 
 namespace TicTacTockGame
 {
-    public class GameLogic  
+    public class GameLogic  : IDisposable
     {
         public BlockController blockController;
 
@@ -18,6 +20,9 @@ namespace TicTacTockGame
             get{return _board;}
         }
         private BaseState _currentState;
+        //멀티 플레이를 처리하는 매니저
+        private MultiplayManager _multiplayerManager;
+        private string _multiplayRoomId;
 
         public enum GameResult{Win,Lose,Draw,None}
 
@@ -40,6 +45,48 @@ namespace TicTacTockGame
                 playerAState = new PlayerState(true);
                 playerBState = new PlayerState(false);
                 SetState(playerAState);
+                break;
+
+                case GameType.MultyPlay:
+                // 멀티플레이어 모드 초기화 작엄
+                _multiplayerManager = new MultiplayManager((state,roomId) =>
+                {
+
+                    _multiplayRoomId = roomId;
+
+                    switch (state)
+                    {
+                        case MultiPlayMangerState.CreateRoom:
+                            //TODO: "상대방을 기다리고 있습니다." 라는 팝업 표시
+                            UnityEngine.Debug.Log("방 생성 됨 , 방 : " + _multiplayRoomId);
+                            
+
+                        break;
+                        case MultiPlayMangerState.JoinRoom:
+                            //TODO:
+                            playerAState = new MultiPlayerstate(true,_multiplayerManager);
+                            playerBState = new PlayerState(false, _multiplayerManager, _multiplayRoomId);
+                            SetState(playerAState);
+                        break;
+                        case MultiPlayMangerState.StartGame:
+                            playerAState = new PlayerState(true , _multiplayerManager , _multiplayRoomId);
+                            playerBState = new MultiPlayerstate(false, _multiplayerManager);
+                            SetState(playerAState);
+                        break;
+                        case MultiPlayMangerState.ExitRoom:
+                        //TODO : "본인이 나갔습니다." 팝업 표시
+
+                        UnityEngine.Debug.Log("상대방이 나감, 방 ID" + _multiplayRoomId);
+
+                        break;
+                        case MultiPlayMangerState.EndGame:
+                        //TODO : "상대방이 접속을 끊었습니다." 팝업 표시
+
+                        UnityEngine.Debug.Log("" + _multiplayRoomId);
+                        break;
+                    }
+                });
+                
                 break;
             }
         }
@@ -106,6 +153,11 @@ namespace TicTacTockGame
             GameManager.Instance.ChangeMain(GameType.Main);
         });
     }
-        
+
+        public void Dispose()
+        {
+            _multiplayerManager?.LeaveRoom(_multiplayRoomId);
+            _multiplayerManager?.Dispose();
+        }
     }
 }

@@ -66,4 +66,19 @@ public class GameManager : Singltone<GameManager>
         _gamePanelController.SetPlayerTurnPanel(playerTurnType);
     }
 
+    // 씬 전환 (Game > Main)
+    public void ChangeToMainScene()
+    {
+        _gameLogic?.Dispose();
+        _gameLogic = null;
+        SceneManager.LoadScene(SCENE_MAIN);
+    }
+
+    //게임이 강제 종료 되었을 때
+    private void OnApplicationQuit()
+    {
+        _gameLogic?.Dispose();
+        _gameLogic=null;
+    }
+
 }
