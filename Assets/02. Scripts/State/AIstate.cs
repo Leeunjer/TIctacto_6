@@ -1,4 +1,5 @@
- using UnityEngine;
+using System.Threading.Tasks;
+using UnityEngine;
 namespace TicTacTockGame
 {
 
@@ -21,14 +22,15 @@ namespace TicTacTockGame
             gameLogic.ChangeGameState();
         }
 
-        public override void OnEnter(GameLogic gameLogic)
+        public override async void OnEnter(GameLogic gameLogic)
         {
 
              // OX UI 업데이트
         GameManager.Instance.SetGameTurn(_playerType);
 
         var board = gameLogic.GetBoard;
-        var result = TicTacToeAI.GetBestMove(board);
+        //var result = TicTacToeAI.GetBestMove(board);
+        var result = await OmockAI.GetBestMove(board);
 
         if (result.HasValue)
         {

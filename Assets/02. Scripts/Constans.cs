@@ -15,7 +15,7 @@ namespace TicTacTockGame
         public enum GameType{Main,Single,Dual,MultyPlay}
 
         public enum PlayerType { None, Player1, Player2 }
-        public const int BOARD_SIZE = 3;
+        public const int BOARD_SIZE = 15;
 
         //서버 주소
         public const string ServerURL = "http://localhost:3000";
